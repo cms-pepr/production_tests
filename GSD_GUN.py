@@ -59,9 +59,10 @@ def calculate_rho(z, eta):
 
 process.generator = cms.EDProducer("FlatEtaRangeGunProducer",
     # particle ids
-    particleIDs=cms.vint32(22,22,11,-11,211,-211,13,-13),
+    #particleIDs=cms.vint32(22,22,11,-11,211,-211,13,-13),
+    particleIDs=cms.vint32(22),
     # max number of particles to shoot at a time
-    nParticles=cms.int32(50),
+    nParticles=cms.int32(1),
     # shoot exactly the particles defined in particleIDs in that order
     exactShoot=cms.bool(False),
     # randomly shoot [1, nParticles] particles, each time randomly drawn from particleIDs
