@@ -1,4 +1,5 @@
 # coding: utf-8
+import os
 
 import FWCore.ParameterSet.Config as cms
 from FWCore.ParameterSet.VarParsing import VarParsing
@@ -16,11 +17,11 @@ options.parseArguments()
 process.maxEvents.input = cms.untracked.int32(options.maxEvents)
 
 
-# pepr PF cand producer
-#graph_path = "graph.pb" 
+# pepr PF candidate producer
+test_dir = os.path.expandvars("$CMSSW_BASE/src/RecoHGCal/GraphReco/test/")
 from RecoHGCal.GraphReco.peprCandidateFromHitProducer_cfi import peprCandidateFromHitProducer
 process.peprCandidateFromHitProducer = peprCandidateFromHitProducer.clone(
-	    #graphPath=cms.string(graph_path),
+	tritonPath=cms.string(test_dir),
 )
 process.reconstruction_step += process.peprCandidateFromHitProducer
 
