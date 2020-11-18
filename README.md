@@ -9,7 +9,7 @@ A simple recipe in CMSSW_11_2_0_pre9 is:
 cmsrel CMSSW_11_2_0_pre9
 cd CMSSW_11_2_0_pre9/src
 git cms-init
-git cms-merge-topic cms-pepr/pepr_CMSSW_11_2_0_pre9
+git cms-merge-topic cms-pepr:pepr_CMSSW_11_2_0_pre9
 scram b -j 8
 
 # Note: Here follow the same instructions as in the main reco-prodtools repo, but use the D49 geometry
