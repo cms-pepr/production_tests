@@ -19,7 +19,7 @@ cd reco_prodtools/templates/python
 cd ../../..
 scram b
 
-git clone git@github.com:cms-pepr/production_tests.git
+git clone git@github.com:kdlong/production_tests.git
 cd production_tests
 bash run_chain.sh 0
 ```
