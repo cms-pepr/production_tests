@@ -1,4 +1,5 @@
 # coding: utf-8
+import os
 
 import FWCore.ParameterSet.Config as cms
 from FWCore.ParameterSet.VarParsing import VarParsing
@@ -14,6 +15,16 @@ options.register('outputFileDQM', 'file:partGun_PDGid22_x96_Pt1.0To100.0_DQM_1.r
 options.parseArguments()
 
 process.maxEvents.input = cms.untracked.int32(options.maxEvents)
+
+
+# pepr PF candidate producer
+test_dir = os.path.expandvars("$CMSSW_BASE/src/RecoHGCal/GraphReco/test/")
+from RecoHGCal.GraphReco.peprCandidateFromHitProducer_cfi import peprCandidateFromHitProducer
+process.peprCandidateFromHitProducer = peprCandidateFromHitProducer.clone(
+	tritonPath=cms.string(test_dir),
+)
+process.reconstruction_step += process.peprCandidateFromHitProducer
+
 
 process.load("SimTracker.TrackAssociation.trackingParticleRecoTrackAsssociation_cfi")
 # append the HGCTruthProducer to the recosim step
@@ -51,6 +62,7 @@ process.FEVTDEBUGoutput.outputCommands.append("keep *_MergedTrackTruth_*_*")
 process.FEVTDEBUGoutput.outputCommands.append("keep *_hgcSimTruth_*_*")
 process.FEVTDEBUGoutput.outputCommands.append("keep *_trackingParticleSimClusterAssociation_*_*")
 process.FEVTDEBUGoutput.outputCommands.append("keep *_trackingParticleMergedSCAssociation_*_*")
+process.FEVTDEBUGoutput.outputCommands.append("keep *_peprCandidateFromHitProducer_*_*")
 
 if hasattr(process, "DQMoutput"):
     process.DQMoutput.fileName = cms.untracked.string(options.outputFileDQM)
